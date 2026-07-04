@@ -1,66 +1,39 @@
-## Foundry
+# Blockchain Security Portfolio
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A hands-on smart contract security project built with Solidity and Foundry.
+Developed as part of a focused blockchain security learning path targeting
+smart contract auditing and DeFi security roles.
 
-Foundry consists of:
+## Project 1 — Voting Contract with Security Controls
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+An on-chain voting system demonstrating core smart contract security patterns.
 
-## Documentation
+### What it does
+- Owner deploys the contract and is the only address that can add candidates
+- Any wallet address can cast one vote for a candidate
+- The contract prevents double voting and invalid candidate selection
 
-https://book.getfoundry.sh/
+### Security concepts demonstrated
 
-## Usage
+| Vulnerability | Protection Used |
+|---|---|
+| Broken access control | Owner pattern — require(msg.sender == owner) |
+| Double voting | mapping(address => bool) hasVoted |
+| Invalid input | Bounds check on candidate index |
+| No auth on admin functions | Constructor captures deployer as owner |
 
-### Build
+### How to run
 
-```shell
-$ forge build
-```
+Install Foundry: https://book.getfoundry.sh/
 
-### Test
+### Tests
 
-```shell
-$ forge test
-```
+- testAddCandidate — verifies only owner can add candidates
+- testVote — verifies vote count increments correctly
+- testCannotVoteTwice — verifies double voting is blocked
 
-### Format
+## Background
 
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+Built by a cybersecurity professional (CySA+, Security+, ISC2 CC) expanding
+into blockchain and smart contract security. Currently building hands-on
+experience with Solidity, Foundry, and common DeFi vulnerability classes.
